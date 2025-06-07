@@ -11,17 +11,17 @@ def home(request):
     keyword = request.GET.get('q', '').strip()
     
     # Query dasar untuk semua anime
-    anim = Anime.objects.all()
+    animes = Anime.objects.all()
     
     # Filter jika ada keyword search
     if keyword:
-        anim_query = anim.filter(judul__icontains=keyword)
+        anim_query = animes.filter(judul__icontains=keyword)
     
     # Urutkan hasil
-    anim = anim.order_by('judul')
+    animes = animes.order_by('judul')
     
     context = {
-        'anime': anim,
+        'animes': animes,
         'keyword': keyword  # Kirim keyword ke template untuk ditampilkan kembali
     }
     return render(request, 'home.html', context)
