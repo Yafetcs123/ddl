@@ -1,0 +1,20 @@
+<!-- Looping melalui daftar anime -->
+{% for anime in anime %}
+  <div>
+    <h2>{{ anime.judul }}</h2>  <!-- Judul anime -->
+    <p>English Title: {{ anime.judul_in_english }}</p>
+    <p>Season: {{ anime.get_season_display }}</p>  <!-- Menampilkan label season -->
+    <p>Rating: {{ anime.rating }}</p>
+    <p>Release Date: {{ anime.tanggal_rilis }}</p>
+    <img src="{{ anime.poster.url }}" alt="{{ anime.judul }} poster">
+    
+    <!-- Looping melalui genre -->
+    <p>Genres:
+      {% for genre in anime.genre.all %}
+        <span>{{ genre.genre }}</span>
+      {% endfor %}
+    </p>
+    
+    <a href="{% url 'detail' anime.id %}">View Details</a>
+  </div>
+{% endfor %}

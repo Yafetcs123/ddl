@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ anime.judul }} - Episode {{ episode.get_episode_display }}</title>
+    <style>
+        .watch-container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+        
+        .video-container {
+            width: 100%;
+            background: #000;
+            margin-bottom: 20px;
+        }
+        
+        .video-player {
+            width: 100%;
+            height: 450px;
+        }
+        
+        .episode-info {
+            margin-bottom: 20px;
+        }
+        
+        .episode-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .back-link {
+            display: inline-block;
+            padding: 8px 15px;
+            background: #1e88e5;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="watch-container">
+        <div class="video-container">
+            <video controls class="video-player">
+                <source src="{{ episode.video.url }}" type="video/mp4">
+                Browser Anda tidak mendukung pemutaran video.
+            </video>
+        </div>
+        
+        <div class="episode-info">
+            <h2 class="episode-title">{{ anime.judul }} - Episode {{ episode.get_episode_display }}</h2>
+            <a href="{% url 'detail' anime.id %}" class="back-link">Kembali ke Detail Anime</a>
+        </div>
+    </div>
+</body>
+</html>
