@@ -55,7 +55,7 @@ class details(models.Model):
     voice_over = models.ManyToManyField(voice_over)
     
     def __str__(self):
-        return f"{self.judul.Judul} - Episode {self.get_episode_display()}"
+        return f"{self.Judul.judul} - Episode {self.get_episode_display()}"
 
 class Animenya(models.Model):
     anime = models.ForeignKey(Anime, on_delete=models.CASCADE, related_name='episodes')
