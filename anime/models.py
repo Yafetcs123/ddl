@@ -47,6 +47,12 @@ class JumlahEpisode(models.IntegerChoices):
     Episode_12 = 12, 'Episode 12' 
     Episode_13 = 13, 'Episode 13'
 
+class Studio(models.Model):
+    nama = models.CharField(max_length=255)
+    
+    def __str__(self):
+        return self.nama
+
 class details(models.Model):
     Judul = models.ForeignKey(Anime, on_delete=models.CASCADE, related_name='details_episodes')
     episode = models.IntegerField(choices=JumlahEpisode.choices)
@@ -57,12 +63,6 @@ class details(models.Model):
     
     def __str__(self):
         return f"{self.Judul.judul} - Episode {self.get_episode_display()}"
-class Studio(models.Model):
-    nama = models.CharField(max_length=255)
-    
-    def __str__(self):
-        return self.nama
-
 class Animenya(models.Model):
     anime = models.ForeignKey(Anime, on_delete=models.CASCADE, related_name='episodes')
     episode = models.IntegerField(choices=JumlahEpisode.choices)
