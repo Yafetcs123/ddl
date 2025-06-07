@@ -51,16 +51,23 @@ class details(models.Model):
     Judul = models.ForeignKey(Anime, on_delete=models.CASCADE, related_name='details_episodes')
     episode = models.IntegerField(choices=JumlahEpisode.choices)
     sinopsis = models.TextField()
+    studio = models.ForeignKey(Studio, on_delete=models.CASCADE)
     judul_in_english = models.CharField(max_length=255)
     voice_over = models.ManyToManyField(voice_over)
     
     def __str__(self):
         return f"{self.Judul.judul} - Episode {self.get_episode_display()}"
+class Studio(models.Model):
+    nama = models.CharField(max_length=255)
+    
+    def __str__(self):
+        return self.nama
 
 class Animenya(models.Model):
     anime = models.ForeignKey(Anime, on_delete=models.CASCADE, related_name='episodes')
     episode = models.IntegerField(choices=JumlahEpisode.choices)
     video = models.FileField(upload_to='anime')
+    urls = models.URLField(max_length=200, null=True) 
     
     class Meta:
         ordering = ['episode']
