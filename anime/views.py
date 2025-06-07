@@ -31,7 +31,7 @@ def detail(request, anime_id):
     
     genres = anime.genre.all()
     episodes = Animenya.objects.filter(anime=anime).order_by('episode')
-    detail = details.objects.filter(judul=anime).first()
+    detail = details.objects.filter(Judul=anime).first()
     
     return render(request, 'detail.html', {
         'anime': anime,
