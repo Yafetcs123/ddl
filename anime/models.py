@@ -23,6 +23,7 @@ class Anime(models.Model):
     poster = models.ImageField(upload_to='poster/')
     season = models.IntegerField(choices=season.choices)
     
+    
     def __str__(self):
         return self.judul
 
@@ -83,7 +84,8 @@ class Animenya(models.Model):
 class Character(models.Model):
     nama = models.CharField(max_length=100)  # Nama karakter (bisa sama untuk foto berbeda)
     foto = models.ImageField(upload_to='characters/')
+    anime = models.ForeignKey(Anime, on_delete=models.CASCADE, related_name='characters', null=True)
     detail = models.ForeignKey('details', on_delete=models.CASCADE, related_name='characters')
 
     def __str__(self):
-        return f"{self.nama} (Foto {self.id})"  # Tambah ID untuk membedakan foto
+        return f"{self.nama} - {self.anime.judul}"

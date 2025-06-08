@@ -28,16 +28,23 @@ def home(request):
 
 def detail(request, anime_id):
     anime = get_object_or_404(Anime, id=anime_id)
-    genres = anime.genre.all()
-    episodes = Animenya.objects.filter(anime=anime).order_by('episode')
-    detail = details.objects.filter(Judul=anime).first()
+    detail_obj = details.objects.filter(Judul=anime).first()
     
-    return render(request, 'detail.html', {
+    # Group karakter berdasarkan nama
+    characters = {}
+    for char in anime.characters.all():
+        if char.nama not in characters:
+            characters[char.nama] = []
+        characters[char.nama].append(char)
+    
+    context = {
         'anime': anime,
-        'genres': genres,
-        'episodes': episodes,
-        'detail': detail
-    })
+        'detail': detail_obj,
+        'characters': characters,  # Kirim karakter yang sudah dikelompokkan
+        'genres': anime.genre.all(),
+        'episodes': Animenya.objects.filter(anime=anime).order_by('episode')
+    }
+    return render(request, 'detail.html', context)
 
 def watch(request, anime_id, episode_num):
     anime = get_object_or_404(Anime, id=anime_id)

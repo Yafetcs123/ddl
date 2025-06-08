@@ -3,7 +3,8 @@ from .models import Anime, details, voice_over, Genre, Animenya, Studio,  Charac
 
 class CharacterInline(admin.TabularInline):
     model = Character
-    extra = 1  # Jumlah form foto tambahan
+    extra = 16  # Jumlah form foto tambahan
+    fields = ('nama', 'foto', 'detail')  # Field yang ditampilkan
 @admin.register(Anime)
 class AnimeAdmin(admin.ModelAdmin):
     list_display = ('judul', 'judul_in_english', 'season', 'rating', 'tanggal_rilis')
@@ -51,3 +52,21 @@ class AnimenyaAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Studio)
+
+
+@admin.register(Character)
+class CharacterAdmin(admin.ModelAdmin):
+    list_display = ('nama', 'anime', 'detail')  # Kolom yang ditampilkan di list view
+    list_filter = ('anime',)  # Filter berdasarkan anime
+    search_fields = ('nama',)  # Pencarian berdasarkan nama karakter
+    raw_id_fields = ('anime', 'detail')  # Memudahkan pencarian relasi
+
+    # Optional: Tampilkan form yang lebih rapi
+    fieldsets = (
+        ('Informasi Karakter', {
+            'fields': ('nama', 'foto')
+        }),
+        ('Relasi', {
+            'fields': ('anime', 'detail')
+        }),
+    )
