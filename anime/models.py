@@ -1,5 +1,6 @@
 from django.db import models
 
+
 # Model untuk season choices (tetap sebagai IntegerChoices)
 class season(models.IntegerChoices):
     season_1 = 1, 'Season 1'
@@ -61,6 +62,9 @@ class details(models.Model):
     judul_in_english = models.CharField(max_length=255)
     voice_over = models.ManyToManyField(voice_over)
     
+
+
+
     def __str__(self):
         return f"{self.Judul.judul} - Episode {self.get_episode_display()}"
 class Animenya(models.Model):
@@ -75,3 +79,11 @@ class Animenya(models.Model):
     
     def __str__(self):
         return f"{self.anime.Judul} - Episode {self.get_episode_display()}"
+
+class Character(models.Model):
+    nama = models.CharField(max_length=100)  # Nama karakter (bisa sama untuk foto berbeda)
+    foto = models.ImageField(upload_to='characters/')
+    detail = models.ForeignKey('details', on_delete=models.CASCADE, related_name='characters')
+
+    def __str__(self):
+        return f"{self.nama} (Foto {self.id})"  # Tambah ID untuk membedakan foto

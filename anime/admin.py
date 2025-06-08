@@ -1,12 +1,16 @@
 from django.contrib import admin
-from .models import Anime, details, voice_over, Genre, Animenya
+from .models import Anime, details, voice_over, Genre, Animenya, Studio,  Character
 
+class CharacterInline(admin.TabularInline):
+    model = Character
+    extra = 1  # Jumlah form foto tambahan
 @admin.register(Anime)
 class AnimeAdmin(admin.ModelAdmin):
     list_display = ('judul', 'judul_in_english', 'season', 'rating', 'tanggal_rilis')
     list_filter = ('season', 'rating')
     search_fields = ('judul', 'judul_in_english')
     filter_horizontal = ('genre',)
+    inlines = [CharacterInline]
     
     fieldsets = (
         ('Informasi Dasar', {
@@ -45,3 +49,5 @@ class AnimenyaAdmin(admin.ModelAdmin):
     search_fields = ('anime__judul',)
     ordering = ['anime', 'episode']
 
+
+admin.site.register(Studio)
