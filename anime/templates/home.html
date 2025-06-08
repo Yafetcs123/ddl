@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,23 +8,25 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Lilita+One&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="home.css">
   <title>DDL Anime</title>
 </head>
-
 <body>
   <header>
     <h3>DDL</h3>
-    <input type="text" placeholder="Cari Anime">
+    <form method="get" action="{% url 'home' %}">
+      <input type="text" name="q" placeholder="Cari Anime" value="{{ keyword }}">
+    </form>
   </header>
   <nav>
     <ul>
       {% if animes %}
       {% for a in animes %}
       <li>
-        <a href="{% url 'detail' a.id %}">Lihat Detail</a>
+        <a href="{% url 'detail' a.id %}">{{ a.judul }}</a>
       </li>
       {% endfor %}
+      {% else %}
+      <li>Tidak ada hasil untuk "{{ keyword }}"</li>
       {% endif %}
     </ul>
   </nav>
@@ -38,8 +39,9 @@
     padding: 0;
     margin: 0;
     overflow-x: hidden;
-    /* Menghindari scroll horizontal */
     background-color: black;
+    color: white;
+    font-family: "Inter", sans-serif;
   }
 
   header {
@@ -47,32 +49,41 @@
     width: 100%;
     height: 3rem;
     display: flex;
-    /* Use flexbox */
     justify-content: space-between;
-    /* Space between items */
     align-items: center;
-    /* Center items vertically */
     padding: 0 30px;
-    /* Add horizontal padding */
     border: 1px solid rgba(128, 128, 128, 0.5);
   }
 
   header h3 {
     color: white;
     font-family: "Josefin Sans", sans-serif;
-    /* Corrected font-family */
   }
 
   header input {
     padding: 0.5rem;
-    /* Add some padding to the input */
     border: 1px solid rgba(128, 128, 128, 0.5);
     border-radius: 4px;
-    /* Optional: add rounded corners */
     background-color: black;
     color: white;
-    margin-left: 1rem;
+  }
+
+  nav ul {
+    list-style: none;
+    padding: 20px;
+  }
+
+  nav li {
+    margin-bottom: 10px;
+  }
+
+  nav a {
+    color: white;
+    text-decoration: none;
+  }
+
+  nav a:hover {
+    text-decoration: underline;
   }
 </style>
-
 </html>
