@@ -44,3 +44,4 @@ class AnimenyaAdmin(admin.ModelAdmin):
     list_filter = ('anime', 'episode')
     search_fields = ('anime__judul',)
     ordering = ['anime', 'episode']
+

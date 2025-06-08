@@ -18,7 +18,7 @@ class Anime(models.Model):
     judul_in_english = models.CharField(max_length=255)
     genre = models.ManyToManyField(Genre)
     rating = models.IntegerField()
-    tanggal_rilis = models.DateTimeField()
+    tanggal_rilis = models.DateField()
     poster = models.ImageField(upload_to='poster/')
     season = models.IntegerField(choices=season.choices)
     
