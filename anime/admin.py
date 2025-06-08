@@ -11,6 +11,8 @@ class AnimeAdmin(admin.ModelAdmin):
     list_filter = ('season', 'rating')
     search_fields = ('judul', 'judul_in_english')
     filter_horizontal = ('genre',)
+    multiupload_list = False
+    multiupload_form = True
     inlines = [CharacterInline]
     
     fieldsets = (
@@ -70,3 +72,19 @@ class CharacterAdmin(admin.ModelAdmin):
             'fields': ('anime', 'detail')
         }),
     )
+
+
+    # Tambahkan method untuk handle multiupload
+def process_uploaded_file(self, uploaded_file):
+        # Contoh: Otomatis buat karakter baru dari file yang diupload
+        character = Character.objects.create(
+            nama=uploaded_file.name.split('.')[0],
+            foto=uploaded_file,
+            anime=self.instance
+        )
+        return {
+            'url': character.foto.url,
+            'thumbnail_url': character.foto.url,
+            'id': character.id,
+            'name': character.nama
+        }

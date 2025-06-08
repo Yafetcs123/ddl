@@ -86,6 +86,11 @@ class Character(models.Model):
     foto = models.ImageField(upload_to='characters/')
     anime = models.ForeignKey(Anime, on_delete=models.CASCADE, related_name='characters', null=True)
     detail = models.ForeignKey('details', on_delete=models.CASCADE, related_name='characters')
+ 
+    class Meta:
+        verbose_name = 'Character'
+        verbose_name_plural = 'Characters'
+        ordering = ['nama']
 
     def __str__(self):
-        return f"{self.nama} - {self.anime.judul}"
+        return f"{self.nama} ({self.anime.judul})"
