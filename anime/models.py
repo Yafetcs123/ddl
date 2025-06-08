@@ -57,7 +57,8 @@ class Studio(models.Model):
 
 class details(models.Model):
     Judul = models.ForeignKey(Anime, on_delete=models.CASCADE, related_name='details_episodes')
-    episode = models.IntegerField(choices=JumlahEpisode.choices)
+    episode = models.IntegerField(choices=JumlahEpisode.choices, null=True, blank=True)
+    tanggal_rilis = models.DateField(null=True, blank=True)
     sinopsis = models.TextField()
     studio = models.ForeignKey(Studio, on_delete=models.CASCADE, null=True, blank=True)
     judul_in_english = models.CharField(max_length=255)

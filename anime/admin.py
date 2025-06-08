@@ -26,8 +26,8 @@ class AnimeAdmin(admin.ModelAdmin):
 
 @admin.register(details)
 class DetailsAdmin(admin.ModelAdmin):
-    list_display = ('Judul', 'episode', 'sinopsis_short')  # Ganti Judul jadi anime
-    list_filter = ('Judul', 'episode')  # Ganti Judul jadi anime
+    list_display = ('Judul','episode', 'sinopsis_short')  # Ganti Judul jadi anime
+    list_filter = ('Judul','episode')  # Ganti Judul jadi anime
     search_fields = ('anime__judul', 'sinopsis')  # Ganti Judul__Judul jadi anime__judul
     filter_horizontal = ('voice_over',)
     
