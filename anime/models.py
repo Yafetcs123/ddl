@@ -8,13 +8,13 @@ class season(models.IntegerChoices):
     season_4 = 4, 'Season 4'
 
 class Genre(models.Model):
-    genre = models.CharField(max_length=255)
+    genre = models.CharField()
     
     def __str__(self):
         return self.genre
 
 class Anime(models.Model):
-    judul = models.CharField(max_length=255)
+    judul = models.CharField()
     judul_in_english = models.CharField(max_length=255)
     genre = models.ManyToManyField(Genre)
     rating = models.IntegerField()
