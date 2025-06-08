@@ -48,7 +48,7 @@ class JumlahEpisode(models.IntegerChoices):
     Episode_13 = 13, 'Episode 13'
 
 class Studio(models.Model):
-    nama = models.CharField(max_length=255)
+    nama = models.CharField(max_length=255, null=True, blank=True)
     
     def __str__(self):
         return self.nama
@@ -57,7 +57,7 @@ class details(models.Model):
     Judul = models.ForeignKey(Anime, on_delete=models.CASCADE, related_name='details_episodes')
     episode = models.IntegerField(choices=JumlahEpisode.choices)
     sinopsis = models.TextField()
-    studio = models.ForeignKey(Studio, on_delete=models.CASCADE)
+    studio = models.ForeignKey(Studio, on_delete=models.CASCADE, null=True, blank=True)
     judul_in_english = models.CharField(max_length=255)
     voice_over = models.ManyToManyField(voice_over)
     
