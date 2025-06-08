@@ -28,7 +28,6 @@ def home(request):
 
 def detail(request, anime_id):
     anime = get_object_or_404(Anime, id=anime_id)
-    
     genres = anime.genre.all()
     episodes = Animenya.objects.filter(anime=anime).order_by('episode')
     detail = details.objects.filter(Judul=anime).first()
