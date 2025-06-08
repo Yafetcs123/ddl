@@ -35,6 +35,7 @@ class voice_over(models.Model):
         return self.voice_over
 
 class JumlahEpisode(models.IntegerChoices):
+    Tailer = 0, 'Tailer'
     Episode_1 = 1, 'Episode 1' 
     Episode_2 = 2, 'Episode 2' 
     Episode_3 = 3, 'Episode 3' 
